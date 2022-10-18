@@ -12,14 +12,12 @@ const charSets = {
   passwordLength: '',
 };
 
-function generatePassword() {
-  return "Hello"
-};
 
 function writePassword() {
-  // const promptVal = prompt('Yes or No?')
-  // console.log(promptVal)
-
+  console.log(Math.floor(Math.random() * 10));//Random int from 0 to 9
+  const temp = 'abcdefghijklmnopqrstuvwxyz';
+  console.log(temp[Math.floor(Math.random() * 26)]);
+  return
   const promptLizard = prompt('How many characters would you like in your password?(8-128)')
   const promptLength = parseInt(promptLizard, 10)
   if (promptLength == NaN) {
@@ -53,7 +51,7 @@ function writePassword() {
     alert('The requested value is not valid. The only options are yes or no.')
     return
   }
-  const password = generatePassword()
+  const password = ''
   const passwordText = document.querySelector("#password");
   passwordText.value = password;
 };
