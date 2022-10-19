@@ -17,8 +17,8 @@ var setList;
 
 function writePassword() {
   // Setup for prompt validation. Returns a number from string input. If it isn't a number, it will ask the user to try again.
-  const promptLizard = prompt('How many characters would you like in your password?(8-128)')
-  const promptLength = parseInt(promptLizard)
+  const promptLizard = prompt('How many characters would you like in your password?(8-128)');
+  const promptLength = parseInt(promptLizard);
   if (!promptLength) {
     alert('The requested value is not valid. A password must have a character length between 8 and 128.')
 
