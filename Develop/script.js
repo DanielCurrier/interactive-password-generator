@@ -1,91 +1,96 @@
 'use strict'
-// Assignment Code
 
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
 const charSets = {
   lowerCase: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
   upperCase: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
   nums: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
   symbols: ['!', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~', ']'],
 };
-var passwordLength;
+
+var promptLower;
+var promptUpper;
+var promptNums;
+var promptSymbols;
 var setList;
 
 function writePassword() {
-  //console.log(Math.floor(Math.random() * 10));//Random int from 0 to 9
-  //console.log(temp[Math.floor(Math.random() * 26)]); //formula for future parts
-  // return
+  // Setup for prompt validation. Returns a number from string input. If it isn't a number, it will ask the user to try again.
   const promptLizard = prompt('How many characters would you like in your password?(8-128)')
   const promptLength = parseInt(promptLizard)
   if (!promptLength) {
     alert('The requested value is not valid. A password must have a character length between 8 and 128.')
-    return
+
   } else if (promptLength < 8 || promptLength > 128) {
     alert('The requested value is not valid. A password must have a character length between 8 and 128.')
-    return
+
   } else {
-    const promptLower = confirm('Would you like lowercase letters in your password?')
-    const promptUpper = confirm('Would you like uppercase letters in your password?')
-    const promptNums = confirm('would you like numbers in your password?')
-    const promptSymbols = confirm('would you like special characters ($,%,& etc.) in your password?')
+    promptLower = confirm('Would you like lowercase letters in your password?')
+    promptUpper = confirm('Would you like uppercase letters in your password?')
+    promptNums = confirm('would you like numbers in your password?')
+    promptSymbols = confirm('would you like special characters ($,%,& etc.) in your password?')
   };
 
-  /// Logical conditionals for prompt choices
+  /// Logical conditionals for prompt/confirm choices. Total of 16 possible concatenations.
   // If none are chosen 👇
   if (!promptLower && !promptUpper && !promptNums && !promptSymbols) {
     setList = alert('You must choose at least one option, try again!')
+
   } // If all criteria are chosen 👇 
   else if (promptLower && promptUpper && promptNums && promptSymbols) {
-    choices = charSets.concat();
-  } // If three criteria are chosen 👇
-  else if (!promptLower && promptUpper && promptNums && promptSymbols) {
-    choices = charSets.concat(upperCase, nums, symbols);
-  } else if (promptLower && !promptUpper && promptNums && promptSymbols) {
-    choices = charSets.concat(lowerCase, nums, symbols);
-  } else if (promptLower && promptUpper && !promptNums && promptSymbols) {
-    choices = charSets.concat(lowerCase, upperCase, symbols);
-  } else if (promptLower && promptUpper && promptNums && !promptSymbols) {
-    choices = charSets.concat(lowerCase, upperCase, nums);
-    // If two criteria are chosen 👇
-  } else if (!promptLower && !promptUpper && promptNums && promptSymbols) {
-    choices = charSets.concat(nums, symbols);
-  } else if (promptLower && promptUpper && !promptNums && !promptSymbols) {
-    choices = charSets.concat(lowerCase, upperCase);
-  } else if (!promptLower && promptUpper && promptNums && !promptSymbols) {
-    choices = charSets.concat(upperCase, nums);
-  } else if (promptLower && !promptUpper && !promptNums && promptSymbols) {
-    choices = charSets.concat(lowerCase, symbols);
-  } else if (promptLower && !promptUpper && promptNums && !promptSymbols) {
-    choices = charSets.concat(lowerCase, nums);
-  } else if (!promptLower && promptUpper && !promptNums && promptSymbols) {
-    choices = charSets.concat(upperCase, symbols);
-  } // If one criteria is chosen 👇
-  else if (promptLower && !promptUpper && !promptNums && !promptSymbols) {
-    choices = charSets.lowerCase;
-  } else if (!promptLower && promptUpper && !promptNums && !promptSymbols) {
-    choices = charSets.upperCase;
-  } else if (!promptLower && !promptUpper && promptNums && !promptSymbols) {
-    choices = charSets.nums;
-  } else if (!promptLower && !promptUpper && !promptNums && promptSymbols) {
-    choices = charSets.symbols;
+    setList = charSets.lowerCase.concat(charSets.upperCase, charSets.nums, charSets.symbols);
   }
-  const password = [];
+  // If three criteria are chosen 👇
+  else if (!promptLower && promptUpper && promptNums && promptSymbols) {
+    setList = charSets.upperCase.concat(charSets.nums, charSets.symbols);
+  } else if (promptLower && !promptUpper && promptNums && promptSymbols) {
+    setList = charSets.lowerCase.concat(charSets.nums, charSets.symbols);
+  } else if (promptLower && promptUpper && !promptNums && promptSymbols) {
+    setList = charSets.lowerCase.concat(charSets.upperCase, charSets.symbols);
+  } else if (promptLower && promptUpper && promptNums && !promptSymbols) {
+    setList = charSets.lowerCase.concat(charSets.upperCase, charSets.nums);
+
+  } // If two criteria are chosen 👇
+  else if (!promptLower && !promptUpper && promptNums && promptSymbols) {
+    setList = charSets.nums.concat(charSets.symbols);
+  } else if (promptLower && promptUpper && !promptNums && !promptSymbols) {
+    setList = charSets.lowerCase.concat(charSets.upperCase);
+  } else if (!promptLower && promptUpper && promptNums && !promptSymbols) {
+    setList = charSets.upperCase.concat(charSets.nums);
+  } else if (promptLower && !promptUpper && !promptNums && promptSymbols) {
+    setList = charSets.lowerCase.concat(charSets.symbols);
+  } else if (promptLower && !promptUpper && promptNums && !promptSymbols) {
+    setList = charSets.lowerCase.concat(charSets.nums);
+  } else if (!promptLower && promptUpper && !promptNums && promptSymbols) {
+    setList = charSets.upperCase.concat(charSets.symbols);
+  }
+  // If one criteria is chosen 👇
+  else if (promptLower && !promptUpper && !promptNums && !promptSymbols) {
+    setList = charSets.lowerCase;
+  } else if (!promptLower && promptUpper && !promptNums && !promptSymbols) {
+    setList = charSets.upperCase;
+  } else if (!promptLower && !promptUpper && promptNums && !promptSymbols) {
+    setList = charSets.nums;
+  } else if (!promptLower && !promptUpper && !promptNums && promptSymbols) {
+    setList = charSets.symbols;
+  }
+
+
+  var password = [];
+  //  loop over promptLength and let the Math.floor/random formula to choose variables in array. 👇
+  for (var i = 0; i < promptLength; i++) {
+    var chooseSetlist = setList[Math.floor(Math.random() * setList.length)];
+    password.push(chooseSetlist);
+  }
+  const finalResult = password.join('');
+  printPassword(finalResult);
+}
+// This function is executed after the password has been generated.
+function printPassword(finalResult) {
   const passwordText = document.querySelector("#password");
-  passwordText.value = password;
-};
+  passwordText.value = finalResult;
+}
 
-
-
-
-
-// Add event listener to generate button
+// Adds event listener to generate button.
 generateBtn.addEventListener("click", writePassword);
-
-
-/// TO-DO
-
-////////////////////////////////////////////////////////////////////////
-
-// In order: write the generator itself with varying calculations based on user choice. Then, write a conditional prompt which will help the computer decide which calculation to use. Finally, code the function which will print the desired outcome on the screen.
