@@ -18,6 +18,6 @@ To copy the password, simply left click and drag across its contents, and press 
 
 To see what is going on under the hood, inspect the page using Chrome DevTools 🛠.
 ## Credits
-Credit goes towards Trilogy Education Services for providing the starter code for the project.
+Credit goes towards Trilogy Education Services for providing the starter code for this project.
 ## License
 Please refer to the LICENSE.md file in the repo 😁.
