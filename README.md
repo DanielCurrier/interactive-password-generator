@@ -3,6 +3,8 @@
 ## Description
 Hi there! My name is Daniel Currier, and this is my first JavaScript project. This is made as a test of my understanding of the language and its applications. After many hours of coding (and recoding) I have created a generator that matches the criteria of the given project. Please refer to the Usage section to know how it works!
 
+Here is the link to the working product: https://lorddanklin.github.io/interactive-password-generator/
+
 ## Installation 
 N/A
 
